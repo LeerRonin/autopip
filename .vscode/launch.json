@@ -1,0 +1,45 @@
+{
+    "name": "quick-python-runner",
+    "displayName": "Quick Python Runner",
+    "description": "Simple and convenient extension to automatically install and update Python libraries before running the current script.",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.60.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:extension.runPythonFile"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.runPythonFile",
+                "title": "Run Python File"
+            }
+        ],
+        "menus": {
+            "editor/title": [
+                {
+                    "command": "extension.runPythonFile",
+                    "when": "resourceLangId == python",
+                    "group": "navigation"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.63.0",
+        "typescript": "^4.5.4",
+        "vscode": "^1.3.0"
+    },
+    "icon": "icon.png"
+}
