@@ -1,0 +1,23 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '14.x'
+    displayName: 'Install Node.js'
+
+  - script: |
+      npm install -g vsce
+      npm install
+    displayName: 'Install dependencies'
+
+  - script: |
+      vsce package
+      vsce publish -p $(vsce_token)
+    displayName: 'Package and publish extension'
+    env:
+      vsce_token: $(VSCE_TOKEN)
